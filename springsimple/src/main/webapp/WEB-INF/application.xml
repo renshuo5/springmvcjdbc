@@ -69,13 +69,20 @@
 	    <tx:method name="query*" propagation="NOT_SUPPORTED" read-only="true" />
 	  	</tx:attributes>
     </tx:advice>
-     
+    
+    <bean id="loggerAop" class="com.rs.aop.LoggerAdvice"/>
     <aop:config>
         <!-- 管理事务操作 -->  
         <aop:pointcut id="servicesPointcut"  
             expression="execution(* com.rs.*.*(..))" />  
         <aop:advisor advice-ref="txAdvice"  
             pointcut-ref="servicesPointcut" />  
+            
+        <aop:aspect id="myAop" ref="loggerAop">
+		    <aop:pointcut id="target" expression="execution(* com.rs.base.dao.BaseDao.queryAll(..))"/>
+		    <aop:before method="checkValidity" pointcut-ref="target"/>
+		    <aop:after method="addLog" pointcut-ref="target"/>
+        </aop:aspect>
     </aop:config> 
 	
 </beans>  

@@ -17,7 +17,8 @@ public class EmployeeDao extends BaseDao<Employee>{
 	 * @return 返回数据库插入的id
 	 */
 	public int saveEmployee(Employee emp){
-		return this.saveEntity(emp);
+		this.save(emp);
+		return 1;
 	}
 	
 	/**

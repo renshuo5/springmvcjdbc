@@ -1,25 +1,27 @@
 package com.rs.aop;
 
-import java.lang.reflect.Method;
-
 import org.apache.log4j.Logger;
-import org.springframework.aop.MethodBeforeAdvice;
+import org.aspectj.lang.JoinPoint;
 
-public class LoggerAdvice implements MethodBeforeAdvice {
-	
+public class LoggerAdvice {
+
 	private Logger logger = Logger.getLogger(LoggerAdvice.class);
-	
-	public void before(Method method, Object[] args, Object target)
-			throws Throwable {
-		// TODO Auto-generated method stub
-		// 类名
-		String targetClassName = target.getClass().getName();
-		// 获取被调用的方法名
-		String targetMethodName = method.getName();
-		// 显示日志的格式字符串
-		String loginInfoText = "前置通知" + targetClassName + "类的"
-				+ targetMethodName + "方法开始执行";
-		logger.info(loginInfoText);
+
+	public void checkValidity() {
+		logger.info("------------------验证合法性----------------");
+		System.out.println("------------------验证合法性----------------");
+		
+	}
+
+	public void addLog(JoinPoint j) {
+		logger.info("------------------添加日志----------------");
+		System.out.println("------------------添加日志----------------");
+		Object obj[] = j.getArgs();
+		for (Object o : obj) {
+			System.out.println(o);
+		}
+		logger.info("========checkSecurity==" + j.getSignature().getName());// 这个是获得方法名
+		System.out.println("========checkSecurity==" + j.getSignature().getName());
 	}
 
 }
