@@ -2,7 +2,10 @@ package com.rs.employee.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,15 +21,22 @@ import com.rs.employee.vo.Employee;
 @RequestMapping("/employee")
 public class EmployeeController {
 	
-	@Autowired
+	/**
+	 * 日志记录实例
+	 */
+	protected final transient Logger logger = LoggerFactory.getLogger(getClass());
+ 
+	
+	@Resource
 	private EmployeeService employeeService;
 	
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String index(Model model){
-		
+		logger.info("进入员工列表页面");
 		List<Employee> list = employeeService.findAll();
 		model.addAttribute("list", list);
+		logger.info("进入员工列表页面结束");
 		return "employee/list";
 	}
 	

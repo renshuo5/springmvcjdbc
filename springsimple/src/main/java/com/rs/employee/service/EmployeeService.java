@@ -1,8 +1,13 @@
 package com.rs.employee.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.ehcache.Ehcache;
+import net.sf.ehcache.Element;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +20,10 @@ public class EmployeeService {
 
 	@Autowired
 	private EmployeeDao employeeDao;
+	
+	@Autowired
+	@Qualifier("employeeCache")
+	private Ehcache employeeCache;
 	/**
 	 * 
 	 * @param distri
@@ -34,8 +43,16 @@ public class EmployeeService {
 		return employeeDao.updateEmployee(emp);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Employee> findAll(){
-		return employeeDao.findAll();
+		List<Employee> list = new ArrayList<Employee>();
+		if(employeeCache.get("employees")==null){
+			list = employeeDao.findAll();
+			employeeCache.put(new Element("employees", list));
+		}else{
+			list =  (List<Employee>) employeeCache.get("employees");
+		}
+		return list;
 	}
 	
 	public Employee findById(int id){

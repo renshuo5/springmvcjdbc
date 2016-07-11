@@ -10,16 +10,6 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  	<context-param>
-	  <param-name>rootLevel</param-name>
-	  <param-value>DEBUG</param-value>
-	</context-param>
-	
-	<context-param>
-	  <param-name>loggingLevel</param-name>
-	  <param-value>DEBUG</param-value>
-	</context-param>
-	
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>   
 		<param-value>WEB-INF/log4j.xml</param-value>  

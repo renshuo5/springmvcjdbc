@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false">
+	<diskStore path="../ehcache/temp" />
+	<defaultCache maxElementsInMemory="25600" eternal="true" overflowToDisk="true" />
+    <cache name="widgetCache" maxElementsInMemory="51200" eternal="false" overflowToDisk="true" timeToIdleSeconds="0" timeToLiveSeconds="30" />
+    <cache name="appCache" maxElementsInMemory="25600" eternal="true" overflowToDisk="true"/>
+    <cache name="themeUriCache" maxElementsInMemory="25600" eternal="true" overflowToDisk="true"/>
+    <cache name="eopDNS" maxElementsInMemory="25600" eternal="true" overflowToDisk="true"/>
+    <cache name="regionCache" maxElementsInMemory="25600" eternal="true" overflowToDisk="true"/>
+    <cache name="siteMenuList" maxElementsInMemory="25600" eternal="true" overflowToDisk="true"/>
+    <cache name="goods_cat" maxElementsInMemory="25600" eternal="true" overflowToDisk="true"/>
+    <cache name="article_cat" maxElementsInMemory="25600" eternal="true" overflowToDisk="true"/>
+    <cache name="sitemap" maxElementsInMemory="25600" eternal="true" overflowToDisk="true"/>
+    
+    <cache name="employeeCache" maxElementsInMemory="10000"
+        maxElementsOnDisk="0" eternal="false" overflowToDisk="false"
+        timeToIdleSeconds="0" timeToLiveSeconds="0" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" diskSpoolBufferSizeMB="30"
+        memoryStoreEvictionPolicy="LRU" statistics="true">
+    </cache>
+    
+</ehcache>
