@@ -1,5 +1,6 @@
 package com.rs.employee.service;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +51,8 @@ public class EmployeeService {
 			list = employeeDao.findAll();
 			employeeCache.put(new Element("employees", list));
 		}else{
-			list =  (List<Employee>) employeeCache.get("employees");
+			Element element = employeeCache.get((Serializable)"employees");
+			list =  (List<Employee>) element.getObjectValue();
 		}
 		return list;
 	}
